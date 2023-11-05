@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class Calculator extends VBox implements EventHandler<events>{
+public class Calculator extends VBox implements EventHandler<ActionEvent>{
 	
 	String number1 = "";
 	String number2 = "";
@@ -31,13 +31,13 @@ public class Calculator extends VBox implements EventHandler<events>{
 		
 		sp.setPadding(new Insets(10, 10, 10, 10));
 		
-		Gridpane gd = new GridPane();
+		GridPane gd = new GridPane();
 		
 		gd.setPadding(new Insets(10, 10, 10, 10));
 		gd.setVgap(5);
 		gd.setHgap(4);
 		
-		gd.setAlignment(Pos.);
+		gd.setAlignment(Pos.BASELINE_CENTER);
 		
 		Button b7 = new Button("7");
 		gd.add(b7, 0, 0);
@@ -65,12 +65,12 @@ public class Calculator extends VBox implements EventHandler<events>{
 		b4.setOnAction(this);
 		
 		Button b5 = new Button("5");
-		gd.(b5, 1, 1);
+		gd.add(b5, 1, 1);
 		b5.setPrefWidth(50);
 		b5.setOnAction(this);
 		
 		Button b6 = new Button("6");
-		gd.add(b6, 1, 2);
+		gd.add(b6, 2, 1);
 		b6.setPrefWidth(50);
 		b6.setOnAction(this);
 		
@@ -80,12 +80,12 @@ public class Calculator extends VBox implements EventHandler<events>{
 		mul.setOnAction(this);
 		
 		Button b1 = new Button("1");
-		gd.add(b1, 0, 3);
+		gd.add(b1, 0, 2);
 		b1.setPrefWidth(50);
 		b1.setOnAction(this);
 		
 		Button b2 = new Button("2");
-		gd.add(b2, 2, 2);
+		gd.add(b2, 1, 2);
 		b2.setPrefWidth(50);
 		b2.setOnAction(this);
 		
@@ -95,7 +95,7 @@ public class Calculator extends VBox implements EventHandler<events>{
 		b3.setOnAction(this);
 		
 		Button minus = new Button("-");
-		gd.add(minus, 3, 3);
+		gd.add(minus, 3, 2);
 		minus.setPrefWidth(50);
 		minus.setOnAction(this);
 		
@@ -115,24 +115,25 @@ public class Calculator extends VBox implements EventHandler<events>{
 		equals.setOnAction(this);
 		
 		Button reset = new Button("C");
-		gd.add(reset, 0, 4, 10, 1);
+		gd.add(reset, 0, 4, 4, 1);
 		reset.setPrefWidth(215);
 		reset.setOnAction(this);
 		
 		this.getChildren().addAll(sp, gd);
 	}
 
-	@Override
 	public void start(ActionEvent event) {
 		
 		Button b = (Button) event.getSource();
 		String value = b.getText();
 		
-		***
-		***
-		***
+			
+	}
+
+	@Override
+	public void handle(ActionEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
-	
 
 }
