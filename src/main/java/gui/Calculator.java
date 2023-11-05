@@ -136,8 +136,8 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 		}
 
 		public float operacion(String o){
-			float n1 = Character.getNumericValue(o.charAt(0));
-			float n2 = Character.getNumericValue(o.charAt(2));
+			int n1 = Character.getNumericValue(o.charAt(0));
+			int n2 = Character.getNumericValue(o.charAt(2));
 			switch (o.charAt(1)) {
 				case '*':
 					return n1*n2;
