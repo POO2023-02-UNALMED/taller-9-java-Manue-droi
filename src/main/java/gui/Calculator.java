@@ -121,101 +121,74 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 		
 		this.getChildren().addAll(sp, gd);
 	}
-		public String numero(String n){
-			if (number1.isEmpty()){
-				number1 = n;
-			} else {
-				number2 = n;
-			}
-			return number1 + operator + number2;
-		}
-
-		public String operador(String o){
-			operator = o;
-			return number1 + operator + number2;
-		}
-
-		public float operacion(String o){
-			int n1 = Character.getNumericValue(o.charAt(0));
-			int n2 = Character.getNumericValue(o.charAt(2));
-			switch (o.charAt(1)) {
-				case '*':
-					return n1*n2;
-				case '/':
-					return n1/n2;
-				case '+':
-					return n1 + n2;
-				case '-':
-					return n1-n2;
-				default:
-					return 0;
-			}
-	}
-	
-	@Override
 	public void handle(ActionEvent event) {
-		
-		Button b = (Button) event.getSource();
-		String value = b.getText();
-		switch (value) {
-		case "0":
-			displayText.setText(numero(value));
-			break;
-		case "1":
-			displayText.setText(numero(value));
-			break;
-		case "2":
-			displayText.setText(numero(value));
-			break;
-		case "3":
-			displayText.setText(numero(value));
-			break;
-		case "4":
-			displayText.setText(numero(value));
-			break;
-		case "5":
-			displayText.setText(numero(value));
-			break;
-		case "6":
-			displayText.setText(numero(value));
-			break;
-		case "7":
-			displayText.setText(numero(value));
-			break;
-		case "8":
-			displayText.setText(numero(value));
-			break;
-		case "9":
-			displayText.setText(numero(value));
-			break;
-		case "/":
-			displayText.setText(operador(value));
-			break;
-		case "*":
-			displayText.setText(operador(value));
-			break;
-		case "+":
-			displayText.setText(operador(value));
-			break;
-		case "-":
-			displayText.setText(operador(value));
-			break;
-		case "=":
-			displayText.setText(Float.toString(operacion(displayText.getText())));
-			number1 = "";
-			number2 = "";
-			operator = "";
-			break;
-		case "C":
-			number1 = "";
-			number2 = "";
-			operator = "";
-			displayText.setText("");
-			break;
-		default:
-			break;
-	}
+        Button b = (Button) event.getSource();
+        String value = b.getText();
+        
+        String text = displayText.getText();
+
+        if (b instanceof Button) {
+            if (value.equals("+") || value.equals("/") || value.equals("*") || value.equals("-")) {
+                if (operator == null) {
+                    operator = value;
+                    number1 = text;
+                    displayText.setText(text + value);
+                } else {
+                   
+                    displayText.setText("ERROR");
+                }
+            } else if (value.equals("=")) {
+                if (operator != null && !number1.isEmpty()) {
+                    number2 = text.substring(text.lastIndexOf(operator) + 1);
+                    Resultado();
+                }
+            } else if (value.equals("C")) {
+                LimpiarCalculadora();
+            } else {
+                displayText.setText(text + value);
+            }
+        }
+    }
+
+    private void Resultado() {
+        double n1 = Double.parseDouble(number1);
+        double n2 = Double.parseDouble(number2);
+        double resultado = 0;
+
+        switch (operator) {
+            case "+":
+                resultado = n1 + n2;
+                break;
+            case "-":
+                resultado = n1 - n2;
+                break;
+            case "*":
+                resultado = n1 * n2;
+                break;
+            case "/":
+                if (n2 != 0) {
+                    resultado = n1 / n2;
+                } else {
+                    displayText.setText("ERROR");
+                    return;
+                }
+                break;
+        }
+
+        displayText.setText(String.valueOf(resultado));
+        operator = null;
+        number1 = "";
+        number2 = "";
+    }
+
+    private void LimpiarCalculadora() {
+        displayText.setText("");
+        operator = null;
+        number1 = "";
+        number2 = "";
+    }
 }
+			
 		
 		
 		
@@ -223,6 +196,4 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 		
 		
 		
-		
-		
-}
+
